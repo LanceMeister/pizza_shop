@@ -1,0 +1,74 @@
+{% load static %}
+
+<!-- Loading helpers functions to use in the template -->
+{% load helpers %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %}{% endblock %}</title>
+		{% block js %}{% endblock %}
+
+		<link href='https://fonts.googleapis.com/css?family=Alegreya+SC' rel='stylesheet' type='text/css'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="{% static 'orders/css/styles.css' %}"/>
+        <link rel="stylesheet" href="{% static 'orders/css/responsivo.css' %}"/>
+        <meta name="format-detection" content="telephone=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		{% block script %}
+		{% endblock %}
+	</head>
+
+	<body>
+		
+		<header>
+			<nav>
+				<ul>
+					<li><a class="icon-menu" title="Our Menu"  href="{% url 'index' %}"></a></li>
+					<li><a class="icon-cart" title="Shopping cart" href="{% url 'cart' %}">
+							<span>
+								<sup id="items_in_cart">{% if items_in_cart > 0 %}{{items_in_cart}}{% endif %}</sup>
+							</span>	
+						</a>
+					</li>
+					{% if user %}
+						<li><a class="icon-orders" href="{% url 'orders' %}" title="My Orders"></a></li>
+					{% endif %}
+					<li>{% block log %} {% endblock %}</li>
+					
+				</ul>
+			</nav>
+
+			<h1><img src="{% static 'orders/img/rest.png' %}" alt="Rest"></h1>
+
+			
+
+			<p> Somewhere in Germany </p>
+			<p class="telefone">+49 151-5555</p>
+		</header>
+
+		{% block body %}
+        {% endblock %}
+		<!--div class="banner-wrapper">
+			<div class="banner">
+			</div>
+			</div -->
+
+		<footer>
+		<nav>
+		<ul>
+		<li><a class="icon-menu" title="Our Menu"  href="{% url 'index' %}"></a></li>
+		<li><a class="icon-cart" title="Shopping cart" href="{% url 'cart' %}"></a></li>
+					{% if user %}
+						<li><a class="icon-orders" href="{% url 'orders' %}" title="My Orders"></a></li>
+					{% endif %}
+					<li>{% block logfooter %} {% endblock %}</li>
+				</ul>
+			</nav>
+
+			<p>Rest © 2018. Some rights reserved.</p>
+		</footer>
+
+	</body>
+</html>

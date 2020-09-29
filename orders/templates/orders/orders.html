@@ -1,0 +1,56 @@
+{% extends "orders/layout.html" %}
+
+{% block title %}
+	Rest - Orders
+{% endblock %}
+
+{% block js %}
+	<script type="text/javascript">
+	 document.addEventListener('DOMContentLoaded', () => {
+		 var menu = document.querySelectorAll('.icon-orders');
+
+		 for (i =0; i<menu.length; i++){
+			 menu[i].style.color= "#f17060";
+		 }
+	 });
+	</script>
+{% endblock %}
+
+{% block log %}
+	<a class="icon-exit" href="{% url 'logout' %}" title="Logout"></a>
+{% endblock %}
+
+
+{% block logfooter %}
+	<a class="icon-exit" href="{% url 'logout' %}" title="Logout"></a>
+{% endblock %}
+
+
+
+{% block body %}
+	
+	<section class="container">
+		<h2 class="subtitulo">My Orders</h2>
+		<div class="grid-16 cart-head">
+			<ul>
+				<li class="mobile-hide ap-width-25">Order</li>
+				<li class="ap-width-20 mobile-1-4">Submitted</li>
+				<li class="ap-width-20 mobile-1-4">Total</li>
+				<li class="ap-width-15 mobile-1-5">Status</li>
+				<li class="ap-width-15 mobile-hide">Delivered</li>
+			</ul>
+		</div>
+		<div class="grid-16 cart-body">
+			{% for order in orders.all %}
+				<ul>
+					<li class="mobile-hide ap-width-25">{{order.id}}</li>
+					<li class="ap-width-20 mobile-1-4">{{order.date_submitted}}</li>
+					<li class="ap-width-20 mobile-1-4"><sup>€</sup>{{order.total}}</li>
+					<li class="ap-width-15 mobile-1-5">{{order.status_order}}</li>
+					<li class="ap-width-15 mobile-hide">{% if order.date_delivered %} {{order.date_delivered}} {% endif %}</li>
+				</ul>
+			{% endfor %}
+		</div>
+	</section>
+
+{% endblock %}
